@@ -2,7 +2,8 @@ import sys
 
 import pygame as p
 
-from zadachi import yslovia1
+from zadachi import yslovia1, probirki25
+
 
 p.init()
 d=p.display.set_mode((1080,810))
@@ -38,7 +39,8 @@ def introrules():
         if t.type==p.QUIT:
             p.quit()
             sys.exit()
-        if t.type==p.MOUSEBUTTONDOWN and 500<t.pos[0]<720 and 480<t.pos[1]<560:
+        if t.type==p.MOUSEBUTTONDOWN:# and 500<t.pos[0]<720 and 480<t.pos[1]<560:
+            print(t)
             flag_intro=1
 
     #замедление
@@ -99,6 +101,8 @@ def zadacha1():
 
         if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and doska_flag==1:
             yslovia1.ekran()
+        if t.type==p.MOUSEBUTTONDOWN and t.button==1 and probirki_flag==1:
+            probirki25()
 
 
 

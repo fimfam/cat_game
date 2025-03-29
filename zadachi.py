@@ -1,4 +1,5 @@
 import tkinter
+from PIL import ImageTk, Image
 class Zadachi:
     def __init__(self,t,a):
         self.text=t
@@ -29,14 +30,23 @@ class Zadachi:
             print(self.enter)
 
 
+def probirki25():
+    okno = tkinter.Tk()
+    okno.geometry("600x600")
+    img = Image.open("крупнопробирки.png")
+    image = ImageTk.PhotoImage(img)
+    panel = tkinter.Label(okno, image=image)
+    panel.pack(side="top", fill="both", expand="no")
 
+    okno.mainloop()
 
 
 
 if __name__=='__main__':
-    zadacha1=Zadachi("как дела?",'хорошо')
-    zadacha1.ekran()
+    probirki1()
 
 
 
-yslovia1=Zadachi("Система уравнений позвзволяет узнать необходимое количество капель каждого из веществ, чтобы создать нужное зелье. В ответ введите x y z через пробел.","30 20 40")
+yslovia1=Zadachi("Система уравнений позвзволяет узнать\n необходимое количество капель каждого\n из веществ, чтобы создать нужное зелье.\n В ответ введите x y z через пробел.","30 20 40")
+
+
