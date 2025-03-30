@@ -10,7 +10,7 @@ d=p.display.set_mode((1080,810))
 b=p.time.Clock()
 intro=[]
 flag_intro=0
-tick=0.5
+tick=0.25
 for i in range(19):
     intro.append(p.image.load(f"C:/Users/Dasha/PycharmProjects/pythonProject1/интро{i+1}.png"))
 #загрузки для первой задачи
@@ -131,7 +131,7 @@ def zaglushka():
 while True:
     if nomerzadachi==0:
         introrules()
-    if nomerzadachi==1:
+    elif nomerzadachi==1:
         zadacha1()
     else:
         zaglushka()
