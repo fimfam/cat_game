@@ -6,13 +6,15 @@ from zadachi import yslovia1, probirki25
 
 
 p.init()
-d=p.display.set_mode((1080,810))
+d=p.display.set_mode((840,700),p.RESIZABLE)
 b=p.time.Clock()
 intro=[]
 flag_intro=0
-tick=0.25
+tick=0.5
 for i in range(19):
-    intro.append(p.image.load(f"C:/Users/Dasha/PycharmProjects/pythonProject1/интро{i+1}.png"))
+    abc=p.image.load(f"C:/Users/Dasha/PycharmProjects/pythonProject1/интро{i+1}.png")
+    abc=p.transform.scale(abc, (840,700))
+    intro.append(abc)
 #загрузки для первой задачи
 fon1=p.image.load("лаборатория1080.png")
 cat=p.image.load("кот стоит прозрачно.png")
@@ -30,6 +32,7 @@ def introrules():
     global intro_number
     global flag_intro
     global tick
+    global d
     #блок отрисовки
     d.blit(intro[intro_number],(0,0))
     p.display.update()
@@ -50,6 +53,7 @@ def introrules():
         intro_number+=1
     elif flag_intro==1:
          nomerzadachi=1
+         d = p.display.set_mode((1080,700), p.RESIZABLE)
     else:
         tick=30
     return
@@ -60,6 +64,7 @@ def zadacha1():
     global cat1_x
     global probirki
     global fon1
+
     # блок отрисовки
     d.blit(fon1,(0, 0))
     d.blit(cat,(cat1_x,255))
@@ -94,10 +99,11 @@ def zadacha1():
             p.quit()
             sys.exit()
 
-        if t.type== p.KEYDOWN and t.key==p.K_LEFT:
+        if t.type== p.KEYDOWN and t.key==p.K_LEFT and cat1_x>0:
             cat1_x-=10
-        if t.type== p.KEYDOWN and t.key==p.K_RIGHT:
+        if t.type== p.KEYDOWN and t.key==p.K_RIGHT and cat1_x<900:
             cat1_x+=10
+
 
         if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and doska_flag==1:
             yslovia1.ekran()
