@@ -2,15 +2,14 @@ import sys
 
 import pygame as p
 
-from zadachi import yslovia1, probirki25, yslovia3
-
+from zadachi import yslovia1, probirki25, yslovia3, yslovia2_1, yslovia2_2, yslovia2_3
 
 p.init()
 d=p.display.set_mode((840,700),p.RESIZABLE)
 b=p.time.Clock()
 intro=[]
 flag_intro=0
-tick=0.5
+tick=0.9
 for i in range(19):
     abc=p.image.load(f"C:/Users/Dasha/PycharmProjects/pythonProject1/интро{i+1}.png")
     abc=p.transform.scale(abc, (840,700))
@@ -33,7 +32,16 @@ cat3=p.transform.scale(cat,(90,180))
 cat3_x=10
 cat3_y=510
 kacheli_flag=0
-
+#загрузки для задачи 2
+fon2=p.image.load("библиотека.png")
+cat2=cat
+shkaf1=p.image.load("шкаф1.png")
+shkaf2=p.image.load("шкаф2.png")
+shkaf3=p.image.load("шкаф3.png")
+counter_shkaf=0
+yslovia=[yslovia2_1,yslovia2_2,yslovia2_3]
+shkaf=[shkaf1,shkaf2,shkaf3]
+flag_shkaf=0
 
 
 nomerzadachi=0
@@ -196,7 +204,37 @@ def zadacha3():
     if yslovia3.itog==1:
         cat3_x=980
         cat3_y=1
-        p.draw.rect(fon3,(255,255,0),(880,0,200,200),5)
+        p.draw.rect(fon3,(255,255,255),(880,0,200,200),5)
+
+def zadacha2():
+    global nomerzadachi
+    global shkaf1
+    global shkaf2
+    global shkaf3
+    global shkaf_x
+    global counter_shkaf
+    global flag_shkaf
+    #отрисовка
+    d.blit(fon2,(0,0))
+    if counter_shkaf==0:
+        d.blit(shkaf1,(540,50))
+    if counter_shkaf<2:
+        d.blit(shkaf2,(0,50))
+    if counter_shkaf<3:
+        d.blit(shkaf3,(540,50))
+    p.display.update()
+    #обработка событий
+    a=p.event.get()
+    for t in a:
+        if t.type == p.QUIT:
+            p.quit()
+            sys.exit()
+        if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and counter_shkaf<3:
+            yslovia[counter_shkaf].ekran()
+            break
+        if
+
+
 
 while True:
     if nomerzadachi==0:
