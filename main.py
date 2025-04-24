@@ -9,7 +9,7 @@ d=p.display.set_mode((840,700),p.RESIZABLE)
 b=p.time.Clock()
 intro=[]
 flag_intro=0
-tick=0.9
+tick=5
 for i in range(19):
     abc=p.image.load(f"C:/Users/Dasha/PycharmProjects/pythonProject1/интро{i+1}.png")
     abc=p.transform.scale(abc, (840,700))
@@ -42,6 +42,10 @@ counter_shkaf=0
 yslovia=[yslovia2_1,yslovia2_2,yslovia2_3]
 shkaf=[shkaf1,shkaf2,shkaf3]
 flag_shkaf=0
+shkaf_x_1=340
+shkaf_x_2=0
+shkaf_x_3=340
+
 
 
 nomerzadachi=0
@@ -211,28 +215,60 @@ def zadacha2():
     global shkaf1
     global shkaf2
     global shkaf3
-    global shkaf_x
     global counter_shkaf
     global flag_shkaf
+    global shkaf_x_1, shkaf_x_2, shkaf_x_3
     #отрисовка
     d.blit(fon2,(0,0))
-    if counter_shkaf==0:
-        d.blit(shkaf1,(540,50))
-    if counter_shkaf<2:
-        d.blit(shkaf2,(0,50))
     if counter_shkaf<3:
-        d.blit(shkaf3,(540,50))
+        d.blit(shkaf[2],(shkaf_x_3,87))
+    if counter_shkaf<2:
+        d.blit(shkaf[1],(shkaf_x_2,87))
+    if counter_shkaf==0:
+        d.blit(shkaf[0],(shkaf_x_1,87))
+
     p.display.update()
     #обработка событий
     a=p.event.get()
+    i=p.key.get_pressed()
+    if flag_shkaf==1 and counter_shkaf==0 and i[p.K_RIGHT]:
+        if shkaf_x_1>1080:
+            flag_shkaf=0
+            counter_shkaf=1
+            p.draw.rect(shkaf2, (255, 255, 255), (340, 30, 50, 50), 5)
+        else:
+            shkaf_x_1+=7
+            print(shkaf_x_1)
+    if flag_shkaf==1 and counter_shkaf==1 and i[p.K_LEFT]:
+        if shkaf_x_2<-540:
+            flag_shkaf=0
+            counter_shkaf=2
+            p.draw.rect(shkaf3, (255, 255, 255), (340, 30, 50, 50), 5)
+        else:
+            shkaf_x_2-=7
+    if flag_shkaf==1 and counter_shkaf==2 and i[p.K_RIGHT]:
+        if shkaf_x_3>1080:
+            flag_shkaf=0
+            counter_shkaf=3
+            p.draw.rect(fon2, (255, 255, 255), (500,400,100,200), 5)
+        else:
+            shkaf_x_3+=7
+
+    if counter_shkaf==0 and flag_shkaf==0:
+        p.draw.rect(shkaf1, (255, 255, 255), (340, 30, 50, 50), 5)
+
     for t in a:
         if t.type == p.QUIT:
             p.quit()
             sys.exit()
-        if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and counter_shkaf<3:
+        if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and counter_shkaf<3 and flag_shkaf==0:
             yslovia[counter_shkaf].ekran()
+            flag_shkaf=1
+            shkaf[counter_shkaf]=p.image.load(f'шкаф{counter_shkaf+1}.png')
             break
-        if
+        if t.type==p.MOUSEBUTTONDOWN   and t.button==1 and counter_shkaf==3:
+            nomerzadachi+=1
+            break
 
 
 
@@ -240,7 +276,7 @@ while True:
     if nomerzadachi==0:
         introrules()
     elif nomerzadachi==1:
-        zadacha3()
+        zadacha2()
     else:
         zaglushka()
 
