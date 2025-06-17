@@ -2,7 +2,7 @@ import sys
 
 import pygame as p
 
-from zadachi import yslovia1, probirki25, yslovia3, yslovia2_1, yslovia2_2, yslovia2_3
+from zadachi import yslovia1, okoshko, yslovia3, yslovia2_1, yslovia2_2, yslovia2_3,yslovia4
 
 p.init()
 d=p.display.set_mode((840,700),p.RESIZABLE)
@@ -45,6 +45,9 @@ flag_shkaf=0
 shkaf_x_1=340
 shkaf_x_2=0
 shkaf_x_3=340
+#загрузки задача 4
+fon4=p.image.load("кофейня.png")
+flag_bumazhka=[0,0,0,0]
 
 
 
@@ -132,7 +135,7 @@ def zadacha1():
             yslovia1.ekran()
             break
         if t.type==p.MOUSEBUTTONDOWN and t.button==1 and probirki_flag==1:
-            probirki25()
+            okoshko("крупнопробирки.png")
 
 
 
@@ -270,13 +273,72 @@ def zadacha2():
             nomerzadachi+=1
             break
 
+def zadacha4():
+    global nomerzadachi
+    global fon4
+    global flag_bumazhka
+    #отрисовка
+    mous=p.mouse.get_pos()
+    d.blit(fon4,(0,0))
+    p.display.update()
+    #подсветка
+
+    if 294<mous[0]<415 and 412<mous[1]<482:
+        p.draw.lines(fon4,[255,255,255], True, ([328,412],[415,414],[383,483],[294,479]),5)
+        flag_bumazhka[0]=1
+    elif flag_bumazhka[0]:
+        fon4 = p.image.load("кофейня.png")
+        flag_bumazhka[0]=0
+
+
+    if 486<mous[0]<564 and 412<mous[1]<482:
+        p.draw.lines(fon4,[255,255,255], True, ([486,413],[558,411],[565,479],[467,479]),5)
+        flag_bumazhka[1]=1
+    elif flag_bumazhka[1]:
+        fon4 = p.image.load("кофейня.png")
+        flag_bumazhka[1]=0
+
+    if 622<mous[0]<729 and 412<mous[1]<482:
+        p.draw.lines(fon4,[255,255,255], True, ([622,415],[698,408],[735,478],[647,485]),5)
+        flag_bumazhka[2]=1
+    elif flag_bumazhka[2]:
+        fon4 = p.image.load("кофейня.png")
+        flag_bumazhka[2]=0
+
+    if 422<mous[0]<604 and 277<mous[1]<390:
+        p.draw.rect(fon4,[255,255,255], [414,277,180,110],5)
+        flag_bumazhka[3]=1
+    elif flag_bumazhka[3]:
+        fon4 = p.image.load("кофейня.png")
+        flag_bumazhka[3]=0
+
+
+
+
+
+    a = p.event.get()
+    for t in a:
+        if t.type == p.QUIT:
+            p.quit()
+            sys.exit()
+        if t.type == p.MOUSEBUTTONDOWN and t.button == 1 :
+            print(t.pos)
+        if t.type == p.MOUSEBUTTONDOWN and t.button==1 and flag_bumazhka[0]:
+            okoshko("бумажка1.png")
+        if t.type == p.MOUSEBUTTONDOWN and t.button==1 and flag_bumazhka[1]:
+            okoshko("бумажка2.png")
+        if t.type == p.MOUSEBUTTONDOWN and t.button==1 and flag_bumazhka[2]:
+            okoshko("бумажка3.png")
+        if t.type == p.MOUSEBUTTONDOWN and t.button==1 and flag_bumazhka[3]:
+            yslovia4.ekran()
+
 
 
 while True:
     if nomerzadachi==0:
         introrules()
     elif nomerzadachi==1:
-        zadacha2()
+        zadacha4()
     else:
         zaglushka()
 

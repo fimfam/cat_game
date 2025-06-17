@@ -9,6 +9,7 @@ class Zadachi:
         self.image=i
 
 
+
     def ekran(self):
         self.okno=tkinter.Tk()
         self.okno.geometry("500x400")
@@ -38,16 +39,15 @@ class Zadachi:
             print(self.enter)
 
 
-def probirki25():
+def okoshko(kartinka):
     okno = tkinter.Tk()
     okno.geometry("600x600")
-    img = Image.open("крупнопробирки.png")
+    img = Image.open(kartinka)
     image = ImageTk.PhotoImage(img)
     panel = tkinter.Label(okno, image=image)
     panel.pack(side="top", fill="both", expand="no")
 
     okno.mainloop()
-
 
 
 if __name__=='__main__':
@@ -64,3 +64,5 @@ yslovia3=Zadachi("Каков должен быть угол отклонения
 yslovia2_1=Zadachi("выбери книжку1","1","полка1.png")
 yslovia2_2=Zadachi("выбери книжку2","1")
 yslovia2_3=Zadachi("выбери книжку3","1")
+
+yslovia4=Zadachi("выберете записку","1")
